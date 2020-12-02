@@ -1,6 +1,9 @@
-// code away!
+require('dotenv').config();
+
 const server = require('./server.js');
 
-server.listen(4000, () => {
-    console.log('Magic is happening on localhost:4000')
+const port = process.env.PORT;
+
+server.listen(port, () => {
+    console.log(`Magic is happening on localhost:${port}`)
 });
