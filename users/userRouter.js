@@ -63,6 +63,7 @@ router.get('/', async (req, res) => {
 });
 
 router.get('/:id', validateUserId, (req, res) => {
+  res.status(200).json(req.user)
   // do your magic!
 });
 
@@ -74,7 +75,6 @@ router.get('/:id/posts', validateUserId, (req, res) => {
   .catch(error => {
     console.log(error)
   })
-  // do your magic!
 });
 
 router.delete('/:id', validateUserId, (req, res) => {
