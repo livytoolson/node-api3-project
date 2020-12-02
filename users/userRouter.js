@@ -1,7 +1,5 @@
 const express = require('express');
-
 const User = require('./userDb');
-// const middlewares = require('../api/middlewares');
 
 const router = express.Router();
 
@@ -42,8 +40,14 @@ const validatePost = (req, res, next) => {
 };
 
 router.post('/', (req, res) => {
-  // do your magic!
-  User.insert()
+  User.insert(req.body)
+  .then(user => {
+    res.status(201).json(user);
+  })
+  .catch(error => {
+    console.log(error)
+    res.status(500).json({ message: 'Error adding the user.' })
+  })
 });
 
 router.post('/:id/posts', (req, res) => {
@@ -64,7 +68,6 @@ router.get('/', async (req, res) => {
 
 router.get('/:id', validateUserId, (req, res) => {
   res.status(200).json(req.user)
-  // do your magic!
 });
 
 router.get('/:id/posts', validateUserId, (req, res) => {
