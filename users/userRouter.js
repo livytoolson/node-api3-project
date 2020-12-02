@@ -70,11 +70,19 @@ router.get('/:id/posts', (req, res) => {
   // do your magic!
 });
 
-router.delete('/:id', (req, res) => {
+router.delete('/:id', validateUserId, (req, res) => {
+  User.remove(req.params.id)
+  .then(() => {
+    res.status(200).json({ message: 'The user has been deleted.' })
+  })
+  .catch(error => {
+    console.log(error)
+    res.status(500).json({ message: 'Error removing the user.' })
+  })
   // do your magic!
 });
 
-router.put('/:id', (req, res) => {
+router.put('/:id', validateUserId, (req, res) => {
   User.update(req.params.id, req.body)
   .then(user => {
     res.status(200).json(user)
@@ -83,7 +91,6 @@ router.put('/:id', (req, res) => {
     console.log(error)
     res.status(500).json({ message: 'Error updating the user.' })
   })
-  // do your magic!
 });
 
 module.exports = router;
