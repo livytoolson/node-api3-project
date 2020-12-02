@@ -12,7 +12,7 @@ const validateUserId = async (req, res, next) => {
       }
     } catch (error) {
       res.status(500).json({ message: 'Error retrieving the user.' })
-    };
+    }
   };
 
   const validateUser = (req, res, next) => {
@@ -22,7 +22,7 @@ const validateUserId = async (req, res, next) => {
         res.status(400).json({ message: 'Missing required name field.' })
     } else {
       next();
-    };
+    }
   };
   
   const validatePost = (req, res, next) => {
@@ -32,7 +32,7 @@ const validateUserId = async (req, res, next) => {
       res.status(400).json({ message: 'Missing required text field.' })
     } else {
       next();
-    };
+    }
   };
 
   module.exports = {
